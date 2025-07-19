@@ -2,22 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HydroSense - Smart Water Monitoring</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
     <h1>💧 HydroSense Dashboard</h1>
-    <div class="card">
-      <h2>Water Level</h2>
-      <div id="waterLevel">Loading...</div>
+
+    <div class="tank-container">
+      <div class="tank">
+        <div id="water" class="water"></div>
+      </div>
+      <p>Water Level: <span id="waterLevel">0%</span></p>
+      <p>Status: <span id="tankStatus">Loading...</span></p>
     </div>
-    <div class="card">
-      <h2>Tank Status</h2>
-      <div id="tankStatus">Waiting...</div>
-    </div>
+
+    <canvas id="waterChart" width="300" height="200"></canvas>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
+
+      
