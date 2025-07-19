@@ -1,37 +1,62 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f0f8ff;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+const waterLevelEl = document.getElementById("waterLevel");
+const tankStatusEl = document.getElementById("tankStatus");
+const waterEl = document.getElementById("water");
+
+let chartData = [];
+let chartLabels = [];
+
+const ctx = document.getElementById('waterChart').getContext('2d');
+const chart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: chartLabels,
+    datasets: [{
+      label: 'Water Level (%)',
+      data: chartData,
+      fill: true,
+      borderColor: '#0077cc',
+      backgroundColor: 'rgba(0,119,204,0.1)',
+      tension: 0.3
+    }]
+  },
+  options: {
+    responsive: true,
+    animation: false,
+    scales: {
+      y: { beginAtZero: true, max: 100 }
+    }
+  }
+});
+
+function simulateSensor() {
+  const level = Math.floor(Math.random() * 101); // 0–100%
+  const now = new Date().toLocaleTimeString();
+
+  // Update chart
+  if (chartLabels.length >= 10) {
+    chartLabels.shift();
+    chartData.shift();
+  }
+  chartLabels.push(now);
+  chartData.push(level);
+  chart.update();
+
+  // Update UI
+  waterLevelEl.textContent = `${level}%`;
+  waterEl.style.height = `${level}%`;
+
+  if (level < 25) {
+    tankStatusEl.textContent = "⚠️ Low Water";
+    waterEl.style.backgroundColor = "#ff5722";
+  } else if (level < 75) {
+    tankStatusEl.textContent = "✅ Normal";
+    waterEl.style.backgroundColor = "#00bcd4";
+  } else {
+    tankStatusEl.textContent = "🟢 Full";
+    waterEl.style.backgroundColor = "#4caf50";
+  }
 }
 
-.container {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-}
+simulateSensor();
+setInterval(simulateSensor, 5000); // update every 5 sec
 
-.card {
-  background: #e6f7ff;
-  margin: 15px 0;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-h1 {
-  color: #0077cc;
-}
-
-#waterLevel, #tankStatus {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 10px;
-}
