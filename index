@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HydroSense - Smart Water Monitoring</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>💧 HydroSense Dashboard</h1>
+    <div class="card">
+      <h2>Water Level</h2>
+      <div id="waterLevel">Loading...</div>
+    </div>
+    <div class="card">
+      <h2>Tank Status</h2>
+      <div id="tankStatus">Waiting...</div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
