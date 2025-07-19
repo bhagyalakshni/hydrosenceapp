@@ -1,0 +1,17 @@
+// Dummy data simulating real-time sensor
+function simulateSensor() {
+  const level = Math.floor(Math.random() * 101); // Water level from 0 to 100
+  document.getElementById("waterLevel").textContent = level + "%";
+
+  if (level < 25) {
+    document.getElementById("tankStatus").textContent = "⚠️ Low Water";
+  } else if (level < 75) {
+    document.getElementById("tankStatus").textContent = "✅ Normal";
+  } else {
+    document.getElementById("tankStatus").textContent = "🟢 Full";
+  }
+}
+
+// Update every 5 seconds
+simulateSensor();
+setInterval(simulateSensor, 5000);
