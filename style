@@ -15,15 +15,22 @@ const chart = new Chart(ctx, {
       data: chartData,
       fill: true,
       borderColor: '#0077cc',
-      backgroundColor: 'rgba(0,119,204,0.1)',
-      tension: 0.3
+      backgroundColor: 'rgba(0, 119, 204, 0.2)',
+      tension: 0.3,
+      pointRadius: 3
     }]
   },
   options: {
     responsive: true,
     animation: false,
     scales: {
-      y: { beginAtZero: true, max: 100 }
+      y: {
+        beginAtZero: true,
+        max: 100,
+        ticks: {
+          stepSize: 20
+        }
+      }
     }
   }
 });
@@ -32,7 +39,7 @@ function simulateSensor() {
   const level = Math.floor(Math.random() * 101); // 0–100%
   const now = new Date().toLocaleTimeString();
 
-  // Update chart
+  // Update graph
   if (chartLabels.length >= 10) {
     chartLabels.shift();
     chartData.shift();
@@ -41,7 +48,7 @@ function simulateSensor() {
   chartData.push(level);
   chart.update();
 
-  // Update UI
+  // Update tank UI
   waterLevelEl.textContent = `${level}%`;
   waterEl.style.height = `${level}%`;
 
@@ -57,6 +64,10 @@ function simulateSensor() {
   }
 }
 
+// Start simulation
 simulateSensor();
-setInterval(simulateSensor, 5000); // update every 5 sec
+setInterval(simulateSensor, 5000);
+
+
+    
 
