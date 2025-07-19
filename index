@@ -19,11 +19,14 @@
       <p>Status: <span id="tankStatus">Loading...</span></p>
     </div>
 
-    <canvas id="waterChart" width="300" height="200"></canvas>
+    <div class="graph-section">
+      <h3>Water Level Graph (Live)</h3>
+      <canvas id="waterChart"></canvas>
+    </div>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
 
-      
+  
